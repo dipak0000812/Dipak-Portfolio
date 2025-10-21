@@ -631,6 +631,11 @@ section {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .stat-card::before {
@@ -663,12 +668,15 @@ section {
     margin-bottom: 0.5rem;
     position: relative;
     z-index: 1;
+    font-weight: 700;
 }
 
 .stat-card p {
     color: var(--text-dim);
     position: relative;
     z-index: 1;
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 /* Experience Section */
@@ -896,36 +904,105 @@ section {
 
 .project-image-container {
     padding: 3rem 2rem 2rem;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.08));
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
     position: relative;
+    overflow: hidden;
+}
+
+.project-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(99, 102, 241, 0.03) 10px,
+            rgba(99, 102, 241, 0.03) 20px
+        );
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card:hover .project-image-container::before {
+    opacity: 1;
 }
 
 .project-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    background: rgba(15, 23, 42, 0.6);
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.15), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(236, 72, 153, 0.15), transparent 50%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
     backdrop-filter: blur(10px);
     border: 1px solid rgba(99, 102, 241, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(99, 102, 241, 0.03) 2px,
+            rgba(99, 102, 241, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(99, 102, 241, 0.03) 2px,
+            rgba(99, 102, 241, 0.03) 4px
+        );
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
 }
 
 .project-image i {
-    font-size: 4rem;
-    color: var(--primary);
+    font-size: 5rem;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3));
 }
 
 .project-card:hover .project-image {
-    background: rgba(15, 23, 42, 0.8);
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.25), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(236, 72, 153, 0.25), transparent 50%),
+        linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(30, 41, 59, 1));
     border-color: var(--primary);
+    box-shadow: inset 0 0 50px rgba(99, 102, 241, 0.1);
 }
 
 .project-card:hover .project-image i {
     transform: scale(1.15) rotate(5deg);
-    color: var(--accent);
+    filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.5));
 }
 
 .project-info {
